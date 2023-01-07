@@ -10,13 +10,14 @@ function ladyBugs(arr){
         if(iterator<fieldSize)
         ladyBugsField[iterator]=1;
     }
-  
+ 
     while(arr.length>0){
         let command=arr.shift();
+      
         let ladyBugIndex=Number(command.split(' ')[0]);
         let direction=command.split(' ')[1];
         let flyLength=Number(command.split(' ')[2]);
-        
+        console.log(direction);
         
         if(flyLength<0 && direction=='left'){
         direction='right';
@@ -27,9 +28,24 @@ function ladyBugs(arr){
             flyLength=Math.abs(flyLength)
         }
         
+        if(direction=='right' && ladyBugIndex+flyLength<fieldSize){
 
+        
+        while(ladyBugsField[ladyBugIndex+flyLength]==1 && ladyBugIndex+flyLength<fieldSize)
+        {
+            flyLength++;
+        }
 
+        if(ladyBugIndex+flyLength>=fieldSize){
+            ladyBugsField[ladyBugIndex]=0;
+        }
+        else{
+            ladyBugsField[ladyBugIndex+flyLength]=1;
+            ladyBugsField[ladyBugIndex]=0;
+        }
 
+        console.log(ladyBugsField);
+    }
         
 }
 
